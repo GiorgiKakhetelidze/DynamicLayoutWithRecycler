@@ -45,7 +45,7 @@ class UserFragment : Fragment() {
 
     private fun setListeners() {
         binding.registerBtnView.setOnClickListener {
-            if(saveToMap())
+            if (saveToMap())
                 findNavController().navigate(UserFragmentDirections.actionUserFragmentToRegisteredFragment())
             else
                 Toast.makeText(requireContext(), "Map is Cleared", Toast.LENGTH_SHORT).show()
@@ -53,8 +53,8 @@ class UserFragment : Fragment() {
     }
 
     private fun saveToMap(): Boolean {
-        binding.outerRecyclerView.children.forEach { cardViewRecycler ->
-            cardViewRecycler.findViewById<RecyclerView>(R.id.outerItemRecyclerView).children.forEach { inputView ->
+        binding.outerRecyclerView.children.forEach { cardView ->
+            cardView.findViewById<RecyclerView>(R.id.outerItemRecyclerView).children.forEach { inputView ->
                 var item = inputView.findViewById<TextInputLayout>(R.id.txtInputLayoutView)
                 if (item == null)
                     item = inputView.findViewById(R.id.chooserInputLayout)
