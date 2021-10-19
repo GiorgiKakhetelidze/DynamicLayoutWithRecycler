@@ -1,15 +1,7 @@
 package com.example.shemajamebeli5.ui
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.core.view.children
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,29 +10,17 @@ import com.example.shemajamebeli5.databinding.FragmentUserBinding
 import com.google.android.material.textfield.TextInputLayout
 
 
-class UserFragment : Fragment() {
+class UserFragment : BaseFragment<UserViewModel, FragmentUserBinding>(
+    FragmentUserBinding::inflate,
+    UserViewModel::class.java
+) {
 
-    private var _binding: FragmentUserBinding? = null
-    private val binding get() = _binding!!
-    private val model: UserViewModel by viewModels()
     private val outerAdapter = OuterAdapter()
     private val userData = mutableMapOf<Int, String>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUserBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
         setRecycler()
         setListeners()
-        model.userData.observe(viewLifecycleOwner) {
-            outerAdapter.data = it
-        }
     }
 
     private fun setListeners() {
@@ -50,6 +30,15 @@ class UserFragment : Fragment() {
             else
                 Toast.makeText(requireContext(), "Map is Cleared", Toast.LENGTH_SHORT).show()
         }
+
+        viewModel.userData.observe(viewLifecycleOwner) {
+            outerAdapter.data = it
+        }
+    }
+
+    private fun setRecycler() {
+        binding.outerRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.outerRecyclerView.adapter = outerAdapter
     }
 
     private fun saveToMap(): Boolean {
@@ -83,15 +72,5 @@ class UserFragment : Fragment() {
             false
         } else
             true
-
-    private fun setRecycler() {
-        binding.outerRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.outerRecyclerView.adapter = outerAdapter
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 
 }

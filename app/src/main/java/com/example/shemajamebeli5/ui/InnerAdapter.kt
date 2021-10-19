@@ -26,7 +26,6 @@ class InnerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int) =
         if (data[position].field_type == INPUT) VIEW_TYPE_INPUT else VIEW_TYPE_CHOOSER
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         when (viewType) {
             VIEW_TYPE_INPUT -> InnerItemInputViewHolder(

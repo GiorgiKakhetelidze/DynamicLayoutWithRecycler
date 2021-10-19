@@ -9,15 +9,9 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/outerItemRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -37,6 +37,7 @@ class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterItemViewHolder>() {
     inner class OuterItemViewHolder(private val binding: OuterItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+
             binding.outerItemRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
             val innerAdapter = InnerAdapter()
             innerAdapter.data = data[adapterPosition]
