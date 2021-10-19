@@ -22,7 +22,7 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding>(
     protected val binding get() = _binding!!
     abstract fun init()
 
-    val viewModel: VM by lazy {
+    protected val viewModel: VM by lazy {
         ViewModelProvider(this)[viewModelClass]
     }
 
